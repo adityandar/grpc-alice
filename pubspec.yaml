@@ -1,7 +1,8 @@
 name: grpc_alice
-description: A new Flutter package project.
+description: This package help to log GRPC request and response.
 version: 0.0.1
-homepage:
+homepage: https://ametory.id
+repository: https://gitlab.com/ametory-open-source/grpc-alice
 
 environment:
   sdk: '>=2.18.6 <3.0.0'
