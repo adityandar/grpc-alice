@@ -43,4 +43,9 @@ This package help to log GRPC request and response.
     )
     ```
 
-2. Shake your device.
+2. use `MyInterceptor` in grpc interceptors options.
+    ```dart
+    MyHandlerClient myHandlerClient = MyHandlerClient(grpcClient.channel, interceptors: [MyInterceptor()]);
+    ```
+
+3. Shake your device.

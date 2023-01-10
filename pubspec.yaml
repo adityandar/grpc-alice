@@ -1,6 +1,6 @@
 name: grpc_alice
 description: This package help to log GRPC request and response.
-version: 0.0.1
+version: 0.0.2
 homepage: https://ametory.id
 repository: https://gitlab.com/ametory-open-source/grpc-alice
 
