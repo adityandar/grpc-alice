@@ -75,7 +75,9 @@ class _LogScreenState extends State<LogScreen> {
                 "${e.type}",
                 style: const TextStyle(fontSize: 10),
               ),
-              backgroundColor: e.type == "RESPONSE" ? Colors.green.shade100 : Colors.amber.shade300,
+              backgroundColor: e.type == "RESPONSE"
+                  ? Colors.green.shade100
+                  : Colors.amber.shade300,
             )
           ],
         ),
@@ -85,14 +87,14 @@ class _LogScreenState extends State<LogScreen> {
         ),
         InkWell(
             onLongPress: () {
-              Clipboard.setData(ClipboardData(text: e.stack));
+              Clipboard.setData(ClipboardData(text: e.stack ?? ""));
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 behavior: SnackBarBehavior.floating,
                 content: const Text("Text Copied"),
                 action: SnackBarAction(
                   label: "OK",
                   onPressed: () {
-                    Clipboard.setData(ClipboardData(text: e.stack));
+                    Clipboard.setData(ClipboardData(text: e.stack ?? ""));
                   },
                 ),
               ));
@@ -115,25 +117,28 @@ class _LogScreenState extends State<LogScreen> {
             child: RefreshIndicator(
               onRefresh: _onRefresh,
               child: SingleChildScrollView(
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  const SizedBox(height: 20),
-                  ...logs.map((e) {
-                    final resp = logResponse.where((el) => el.ref == e.ref);
-                    return Card(
-                        margin: const EdgeInsets.only(bottom: 20),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 10),
-                            _cardLog(e),
-                            if (resp.isNotEmpty) const Divider(),
-                            if (resp.isNotEmpty) _cardLog(resp.first),
-                            const SizedBox(height: 10),
-                          ],
-                        ));
-                  }).toList(),
-                  const SizedBox(height: 20),
-                ]),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20),
+                      ...logs.map((e) {
+                        final resp = logResponse.where((el) => el.ref == e.ref);
+                        return Card(
+                            margin: const EdgeInsets.only(bottom: 20),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 10),
+                                _cardLog(e),
+                                if (resp.isNotEmpty) const Divider(),
+                                if (resp.isNotEmpty) _cardLog(resp.first),
+                                const SizedBox(height: 10),
+                              ],
+                            ));
+                      }).toList(),
+                      const SizedBox(height: 20),
+                    ]),
               ),
             ),
           ),
