@@ -4,3 +4,6 @@
 ## 0.0.2
 
 * Fixing interceptor
+## 0.0.3
+
+* Fixing Null String
