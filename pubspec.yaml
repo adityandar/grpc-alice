@@ -5,13 +5,13 @@ homepage: https://ametory.id
 repository: https://gitlab.com/ametory-open-source/grpc-alice
 
 environment:
-  sdk: '>=2.18.6 <3.0.0'
+  sdk: ">=2.18.6 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  grpc: ^3.2.3
+  grpc: ^4.0.1
   intl: ^0.18.1
   logger: ^2.0.1
   path_provider: ^2.0.15
