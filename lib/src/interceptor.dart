@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:logger/logger.dart';
 
@@ -18,15 +17,29 @@ class MyInterceptor implements ClientInterceptor {
   });
 
   @override
-  ResponseFuture<R> interceptUnary<Q, R>(ClientMethod<Q, R> method, Q request, CallOptions options, ClientUnaryInvoker<Q, R> invoker) {
+  ResponseFuture<R> interceptUnary<Q, R>(ClientMethod<Q, R> method, Q request,
+      CallOptions options, ClientUnaryInvoker<Q, R> invoker) {
     var logger = Logger(
       filter: useInProd ? ProductionFilter() : null,
-      printer: PrettyPrinter(methodCount: 0, errorMethodCount: 8, lineLength: 0, colors: false, printEmojis: false, printTime: false),
+      printer: PrettyPrinter(
+        methodCount: 0,
+        errorMethodCount: 8,
+        lineLength: 0,
+        colors: false,
+        printEmojis: false,
+        printTime: false,
+      ),
       output: ConsoleOutput(false),
     );
     var loggerResp = Logger(
       filter: useInProd ? ProductionFilter() : null,
-      printer: PrettyPrinter(methodCount: 0, errorMethodCount: 8, lineLength: 0, colors: false, printEmojis: false, printTime: false),
+      printer: PrettyPrinter(
+          methodCount: 0,
+          errorMethodCount: 8,
+          lineLength: 0,
+          colors: false,
+          printEmojis: false,
+          printTime: false),
       output: ConsoleOutput(true),
     );
     String key = getRandomString(5);
@@ -63,7 +76,11 @@ class MyInterceptor implements ClientInterceptor {
   }
 
   @override
-  ResponseStream<R> interceptStreaming<Q, R>(ClientMethod<Q, R> method, Stream<Q> requests, CallOptions options, ClientStreamingInvoker<Q, R> invoker) {
+  ResponseStream<R> interceptStreaming<Q, R>(
+      ClientMethod<Q, R> method,
+      Stream<Q> requests,
+      CallOptions options,
+      ClientStreamingInvoker<Q, R> invoker) {
     return invoker(method, requests, options);
   }
 }
@@ -80,10 +97,17 @@ class ConsoleOutput extends LogOutput {
         if (kDebugMode) {
           // print(line.replaceAll("│ ", "").replaceAll("└", "").replaceAll("┌", ""));
         }
-        _log.add(line.replaceAll("│ ", "").replaceAll("└", "").replaceAll("┌", "").replaceAll("├", ""));
+        _log.add(line
+            .replaceAll("│ ", "")
+            .replaceAll("└", "")
+            .replaceAll("┌", "")
+            .replaceAll("├", ""));
       }
       var dbHelper = DBHelper();
-      await dbHelper.saveLogModel(LogModel(stack: _log.join("\n"), createdAt: DateTime.now(), type: isResponse ? "RESPONSE" : "REQUEST"));
+      await dbHelper.saveLogModel(LogModel(
+          stack: _log.join("\n"),
+          createdAt: DateTime.now(),
+          type: isResponse ? "RESPONSE" : "REQUEST"));
     } catch (e) {
       print("ERROR OUTPUT $e");
     }

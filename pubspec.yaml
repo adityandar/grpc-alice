@@ -16,7 +16,6 @@ dependencies:
   logger: ^2.0.1
   path_provider: ^2.0.15
   provider: ^6.0.5
-  shake: ^2.2.0
   sqflite: ^2.3.0
   path: ^1.8.3
 
